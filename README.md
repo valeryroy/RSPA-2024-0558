@@ -6,7 +6,7 @@ This is a repository of the codes and figures produced for this manuscript.
 ## Example 1: lense geometry
 
 ### code: lens.f90
-#### usage: ./lens  <rad> <psi> <Npan> <Nsub> <Nleg> <Nmom>
+#### usage: ./lens  rad psi Npan Nsub Nleg Nmom
   
   rad: radius lens
   
