@@ -27,5 +27,5 @@ find the coefficients of the expansion $2\lambda [1+ \mu_1 \lambda + \mu_2 \lamb
 #### output file: 
 moments.dat
 #### post-processing: 
-- run "maple polarization.mw" to find a Pad\'e approximant of $\text{Im}[\alpha_{1,1}(z)]$ and $\text{Im}[\alpha_{2,2}(z)]$ with $z= -1/(2\lambda) = x+ iy_0$,  $y_0 \ll 1$
-- run "maple diffpade.mw" to find a 1st-order differential Pad\'e approximants 
+- run "maple polarization.mw" to find a Padé approximant of $\text{Im}[\alpha_{1,1}(z)]$ and $\text{Im}[\alpha_{2,2}(z)]$ with $z= -1/(2\lambda) = x+ iy_0$,  $y_0 \ll 1$
+- run "maple diffpade.mw" to find a 1st-order differential Padé approximants 
