@@ -11,11 +11,11 @@ program lens
   !    Idir: set to 1 for sigma*11, 2 for sigma*22
   ! 
   !
-  ! Goal: find the dilute approximation for a lens-shaped inclusion in the form
+  ! Goal: find the polarizations alpha[1,1] and alpha[2,2] of lens-shaped inclusion in the form
   !
-  ! sigma*11 or 22 = 1+ 2*phi*lambda*(1+ mu[1]*lambda + mu[2]*lambda[2]+ ....)
+  !            2*lambda*(1+ mu[1]*lambda + mu[2]*lambda[2]+ ....)
   ! where
-  !       lambda= (sigma-1)/(sigma+1) (sigma is the inclusion's conductivity normalized to that of the matrix)
+  !       lambda= (eps-1)/(eps+1) (eps is the inclusion's permmitivity normalized to that of the matrix)
   !
   ! This code finds the coefficients mu[1],..., mu[Mmom]
   !
@@ -27,7 +27,7 @@ program lens
   !
   ! Author: R.V. Roy, 06/08/2023
   !
-  ! use maple pade.mw to sum series: 2*lambda*(1+ mu[1]*lambda + mu[2]*lambda[2]+ ....) 
+  ! use maple pade.mw to sum the 2 series: 2*lambda*(1+ mu[1]*lambda + mu[2]*lambda[2]+ ....) 
   !....................................................................
 !  
 implicit double precision (a-h,o-z)
@@ -62,7 +62,7 @@ narg = COMMAND_ARGUMENT_COUNT()
      write(*,*) " Nleg: order of Gauss-Legendre quadrature on each subpanel (8, or 16)"
      write(*,*) " Nmom: Number of moments (even integer)"
      write(*,*) " "
-     write(*,*) " call: maple  pade.mw"
+     write(*,*) " call: maple  polarization.mw"
      stop
   end if
   
