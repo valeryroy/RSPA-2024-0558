@@ -9,26 +9,21 @@ This is a repository of the codes and figures produced for this manuscript.
 
 lens.f90
 
-#### usage: 
+### usage: 
 
 ./lens  rad psi Npan Nsub Nleg Nmom
   
-  rad: radius lens
+  - rad: radius lens
+  - psi: half-angle of lens (in degrees)
+  - Npan: number of panels
+  - Nsub: number of subpanels
+  - Nleg: order of Gauss-Legendre quadrature on each subpanel (8, or 16)
+  - Nmom: Number of moments (even integer)
   
-  psi: half-angle of lens (in degrees)
-  
-  Npan: number of panels
-  
-  Nsub: number of subpanels
-  
-  Nleg: order of Gauss-Legendre quadrature on each subpanel (8, or 16)
-  
-  Nmom: Number of moments (even integer)
-  
-#### example:
+### example:
 ./lens 1.0 120 16 32 16 10
 
-#### goal: 
+### goal: 
 find the coefficients of the expansion $2\lambda [1+ \mu_1 \lambda + \mu_2 \lambda^2 + \cdots]$ of the polarization $\alpha_{1,1}$ and $\alpha_{2,2}$
 
 #### output file: 
