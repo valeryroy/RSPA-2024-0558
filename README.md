@@ -20,13 +20,12 @@ lens.f90
   - Nleg: order of Gauss-Legendre quadrature on each subpanel (8, or 16)
   - Nmom: Number of moments (even integer)
   
-### example:
+#### example:
 ./lens 1.0 120 16 32 16 10
-
-### goal: 
+#### goal: 
 find the coefficients of the expansion $2\lambda [1+ \mu_1 \lambda + \mu_2 \lambda^2 + \cdots]$ of the polarization $\alpha_{1,1}$ and $\alpha_{2,2}$
-
 #### output file: 
 moments.dat
 #### post-processing: 
-run "maple polarization.mw" to find $\Im[\alpha_{1,1}(z)]$ and $\Im[\alpha_{2,2}(z)]$ with $z= -1/(2\lambda) = x+ iy_0$,  $y_0 \ll 1$
+- run "maple polarization.mw" to find a Pad\'e approximant of $\text{Im}[\alpha_{1,1}(z)]$ and $\text{Im}[\alpha_{2,2}(z)]$ with $z= -1/(2\lambda) = x+ iy_0$,  $y_0 \ll 1$
+- run "maple diffpade.mw" to find a 1st-order differential Pad\'e approximants 
