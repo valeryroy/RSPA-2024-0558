@@ -29,9 +29,9 @@ lens.f90
 ./lens 1.0 120 16 32 16 10
 
 #### goal: 
-find the coefficients of the expansion $2\lambda [1+ \mu_1 \lambda + \mu_2 lambda^2 + \cdots]$ of the polarization $\alpha_{1,1}$ and $\alpha_{2,2}$
+find the coefficients of the expansion $2\lambda [1+ \mu_1 \lambda + \mu_2 \lambda^2 + \cdots]$ of the polarization $\alpha_{1,1}$ and $\alpha_{2,2}$
 
 #### output file: 
 moments.dat
 #### post-processing: 
-run "maple polarization.mw" to find Im[alpha[1,1](z)] and Im[alpha[2,2](z)} with z= -1/(2*lambda) = x+ i*y0,  y0<<1
+run "maple polarization.mw" to find $\Im[\alpha_{1,1}(z)]$ and $\Im[\alpha_{2,2}(z)]$ with $z= -1/(2\lambda) = x+ iy_0$,  $y_0 \ll 1$
