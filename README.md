@@ -29,7 +29,7 @@ lens.f90
 ./lens 1.0 120 16 32 16 10
 
 #### goal: 
-find the coefficients of the expansion 2\lambda [1+ \mu_1 \lambda + \mu_2 lambda_2 + ...] of the polarization alpha_{1,1} and alpha_{2,2}
+find the coefficients of the expansion $2\lambda [1+ \mu_1 \lambda + \mu_2 lambda^2 + \cdots]$ of the polarization $\alpha_{1,1}$ and $\alpha_{2,2}$
 
 #### output file: 
 moments.dat
