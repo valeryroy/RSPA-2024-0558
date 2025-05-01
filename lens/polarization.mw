@@ -1,0 +1,79 @@
+# This script find Im{M[1,1](z)} and Im{M[2,2](z)}
+# for z= -1/(2*lambda) = x+ i*y0,  y0<<1
+
+restart;
+with(numapprox):
+with(plots):
+Digits:=20:
+
+
+# read moments output of lens.f90 from file moments.dat
+
+read("/home/vroy/Moment-Green/dilute/2d/Lens/moments.dat"):
+
+y0:= 0.05;
+mp:=M/2:
+
+
+sum1:= 1+sum(mu1[k]*lambda^k,k=1..M):
+q1:=2*lambda*pade(sum1,lambda=0,[mp-1,mp]):
+lambda:= -0.5/z;
+polariz1:= simplify(q1):
+    num:=numer(polariz1):
+    rots:=fsolve(num,z);
+    den:=denom(polariz1):
+    poles:=fsolve(den,z);
+z:= x+I*y0;
+
+Imp1:=Im(polariz1);
+
+lambda:='lambda':z:='z':
+
+sum2:= 1+sum(mu2[k]*lambda^k,k=1..M):
+q2:=2*lambda*pade(sum2,lambda=0,[mp-1,mp]):
+lambda:= -0.5/z;
+
+polariz2:= simplify(q2):
+    num:=numer(polariz2):
+    rots:=fsolve(num,z);
+    den:=denom(polariz2):
+    poles:=fsolve(den,z);
+
+z:= x+I*y0;
+Imp2:=Im(polariz2);
+
+plot({Imp1,Imp2},x=-0.5..0.5);
+
+done;
+############# 2nd version ############
+restart;
+with(numapprox);
+with(plots);
+Digits := 20;
+read "/home/vroy/Moment-Green/dilute/2d/Lens/moments.dat";
+y0 := 0.01;
+mp := M/2;
+sum1 := 1 + sum(mu1[k]*lambda^k, k = 1 .. M);
+q1 := 2*lambda*pade(sum1, lambda = 0, [mp - 1, mp]);
+lambda := -0.5/z;
+polariz1 := simplify(q1);
+convert(polariz1, parfrac);
+num := numer(polariz1);
+rots := fsolve(num, z);
+den := denom(polariz1);
+poles := fsolve(den, z);
+z := x + y0*I;
+Imp1 := Im(polariz1);
+lambda := 'lambda';
+z := 'z';
+sum2 := 1 + sum(mu2[k]*lambda^k, k = 1 .. M);
+q2 := 2*lambda*pade(sum2, lambda = 0, [mp - 1, mp]);
+lambda := -0.5/z;
+polariz2 := simplify(q2);
+num := numer(polariz2);
+rots := fsolve(num, z);
+den := denom(polariz2);
+poles := fsolve(den, z);
+z := x + y0*I;
+Imp2 := Im(polariz2);
+plot([Imp1, Imp2], x = -0.5 .. 0.5, numpoints = 1500);
