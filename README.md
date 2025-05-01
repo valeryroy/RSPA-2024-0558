@@ -3,9 +3,9 @@ Data for RSPA manuscript "Analytic Representation of the Polarization Tensor: Ap
 
 This is a repository of the codes and figures produced for this manuscript.
 
-# Example 1: lense geometry
+## Example 1: lense geometry
 
-code: lens.f90
+### code: lens.f90
 usage: ./lens  <rad> <psi> <Npan> <Nsub> <Nleg> <Nmom>
   
   rad: radius lens
