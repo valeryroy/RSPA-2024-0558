@@ -7,8 +7,8 @@ This is a repository of the codes and figures produced for this manuscript.
 ### code: 
 spectral.f90
 ### usage:
-./spectral  <rad> <omega> <Ndpt>  <Nmom> <idir>
-  Choose omega integer and 0<rad<1  
+./spectral  <rad> <omega> <Ndpt>  <Nmom> <idir> 
+
       - rad/omega: geometric parameters for r= 1+rad*cos(omega*theta)
       - Ndpt : Number of boundary points per unit length
       - Nmom: Number of moments (even integer)
