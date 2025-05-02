@@ -21,7 +21,7 @@ spectral.f90
 #### output file: 
 - numoments.dat
 #### post-processing: 
-- run "maple spect.mw" find the PAs [m-1/m] and [m/m] from the moments $\{\nu[k]\} k=0,1,...,M$ of the variable $s = (eps1/eps2 -1)$, then plot $\text{Im}([m-1/m])$ or $[m/m]$ vs $z$, with $s= -1/(z+1/2)$, $z =x+iy_0$, $-0.5<x< 0.5$, $y_0=0.01$;
+- run "maple spect.mw" find the PAs [m-1/m] and [m/m] from the moments $\{\nu[k]\} k=0,1,...,M$ of the variable $s = (\epsilon_1/\epsilon_2 -1)$, then plot $\text{Im}([m-1/m])$ or $[m/m]$ vs $z$, with $s= -1/(z+1/2)$, $z =x+iy_0$, $-0.5<x< 0.5$, $y_0=0.01$;
 
 
 ## Example 2: lens geometry
