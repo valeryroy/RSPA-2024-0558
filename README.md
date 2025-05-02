@@ -56,7 +56,7 @@ Find the coefficients of the expansion $\lambda [1- \mu_1 \lambda + \mu_2 \lambd
 polygon.f90
 ### usage: 
 
-./polygon $\text{<Ngon> <Npan> <Nsub> <Nleg>  <Nmom>}$ 
+`./polygon Ngon <Npan> <Nsub> <Nleg>  <Nmom>` 
   - Ngon: number of polygon sides  
   - Npan: number of panels
   - Nsub: number of subpanels
