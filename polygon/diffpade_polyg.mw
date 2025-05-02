@@ -1,0 +1,102 @@
+# diffpade_polyg.mw:
+# This script compute the 1st-order differential approximants (DAs)
+# of the polarization functions from their power series in
+#                lambda=(epsilon-1)/(epsilon+1)
+# then plot the Re/Im of the polarization function at lambda=-1/2*z,
+#                          z=x+ I*y0, x in [-0.5,0.5], y0<< 1
+#
+# 1st-order DAs are solution of:
+#
+# P(lambda)*F'(lambda)+Q(lambda)*F(lambda)+R(lambda)=O(^K),
+
+#              K= deg(P)+deg(Q)+deg(R)+2
+#
+# Once P, Q, R are found from the knowledge of sum(mu1[k]*lambda^k,k=0..Mmax),
+# the approximant is found by integrading the ODE over a complex path
+# lambda = lambda1*s from s=0 to s=1 to find the value at lambda1
+#
+# L= deg(P), M=deg(Q), N=deg(R)
+#
+# Note: the data file contains 2 series sum(mu[k]*lambda^k,k=0..Mmax) and
+#       sum(mu2[k]*lambda^k,k=0..Mmax). For the square (isotropic), only
+#       one series is plotted.
+#------------------------
+restart;with(plots):
+with(numapprox):
+Digits := 16;
+read "moments.dat":
+Mmax := M;
+y0 := 0.025;
+
+idir:=1; # set idir:=1 to get alpha[1,1]
+
+L := 3;
+M := 2;
+N := 1;
+
+F1 := mu1[0] + sum(mu1[k]*la^k, k = 1 .. Mmax):
+F2 := mu1[0] + sum(mu2[k]*la^k, k = 1 .. Mmax):
+P1 := sum(p1[k]*la^k, k = 0 .. L):
+p1[L] := 1;
+P2 := sum(p2[k]*la^k, k = 0 .. L):
+p2[L] := 1;
+Q1 := sum(q1[k]*la^k, k = 0 .. M):
+R1 := sum(r1[k]*la^k, k = 0 .. N):
+g1 := series(diff(F1, la)*P1 + F1*Q1 + R1, la, L + M + N + 2):
+Q2 := sum(q2[k]*la^k, k = 0 .. M):
+R2 := sum(r2[k]*la^k, k = 0 .. N):
+g2 := series(diff(F2, la)*P2 + F2*Q2 + R2, la, L + M + N + 2):
+for k from 0 to L + M + N + 1 do
+    c1[k] := coeff(g1, la, k);
+end do:
+
+for k from 0 to L + M + N + 1 do
+    c2[k] := coeff(g2, la, k);
+end do:
+
+solve({seq(c1[j], j = 0 .. L + M + N + 1)}, {seq(p1[j], j = 0 .. L - 1), seq(q1[j], j = 0 .. M), seq(r1[j], j = 0 .. N)}):
+assign(%);
+
+solve({seq(c2[j], j = 0 .. L + M + N + 1)}, {seq(p2[j], j = 0 .. L - 1), seq(q2[j], j = 0 .. M), seq(r2[j], j = 0 .. N)}):
+assign(%);
+
+convert(Q1/P1, parfrac, la):
+convert(Q2/P2, parfrac, la):
+
+Npt := 500;
+
+for i from 0 to Npt do
+    x[i] := -0.5 + i/Npt;
+    la0 := -0.5/(x[i] + y0*I);
+    ode1 := subs(la = la0*s, P1/la0)*diff(y1(s), s) + subs(la = la0*s, Q1)*y1(s) + subs(la = la0*s, R1);
+    ics1 := y1(0) = 1;
+    dsol1 := dsolve({ics1, ode1}, numeric, method = dverk78, abserr = 1.*10^(-4), relerr = 1.*10^(-4));
+    sol1 := dsol1(1.0);
+    IPolar1[i] := Im(2*la0*op(2, op(2, sol1)));
+    RPolar1[i] := Re(2*la0*op(2, op(2, sol1)));
+    
+    ode2 := subs(la = la0*s, P2/la0)*diff(y2(s), s) + subs(la = la0*s, Q2)*y2(s) + subs(la = la0*s, R2);
+    ics2 := y2(0) = 1;
+    dsol2 := dsolve({ics2, ode2}, numeric, method = dverk78, abserr = 1.*10^(-4), relerr = 1.*10^(-4));
+    sol2 := dsol2(1.0);
+    IPolar2[i] := Im(2*la0*op(2, op(2, sol2)));
+    RPolar2[i] := Re(2*la0*op(2, op(2, sol2)));
+end do:
+
+if ( idir = 1) then
+X1 := Vector(Npt, i -> x[i]):
+Y1 := Vector(Npt, i -> IPolar1[i]):
+Z1 := Vector(Npt, i -> RPolar1[i]):
+
+dataplot(X1, Y1, style = line);
+dataplot(X1, Z1, style = line);
+end if;
+
+if ( idir = 2) then
+X2 := Vector(Npt, i -> x[i]):
+Y2 := Vector(Npt, i -> IPolar2[i]):
+Z2 := Vector(Npt, i -> RPolar2[i]):
+
+dataplot(X2, Y2, style = line);
+dataplot(X2, Z2, style = line);
+end if;
