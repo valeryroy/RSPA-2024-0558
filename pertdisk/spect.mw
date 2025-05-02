@@ -1,0 +1,54 @@
+# find the PA from the moments {nu[k]} k=0,1,...,M
+# of the variable s = (eps1/eps2 -1)
+#
+
+# find series  = s*( nu[0]- nu[1]*s + nu[2]*s^2 - ...) and sequence of PAs [m-1/m] and [m/m]
+# 
+# then plot Im([m-1/m] or [m/m]) vs z, with s= -1/(z+1/2), z =x+ I*y0,     -0.5 < x < 0.5, y0=0.01
+
+
+restart;
+with(numapprox):
+Digits:=16:
+
+read("numoments.dat"):
+
+for m from 2 to M by 2 do                                                      
+    sigma := sum(nu[k]*(-s)^k,k=0..m):                                             
+    mp:=m/2:                                                                              
+    pad[m-1]:=s*pade(sigma,s=0,[mp-1,mp]):
+    num:=numer(pad[m-1]);
+    rots[m-1]:=fsolve(num,s);
+    den:=denom(pad[m-1]);
+    poles[m-1]:=fsolve(den,s);    
+    pad[m]:=s*pade(sigma,s=0,[mp,mp]):
+end do:
+
+print("s->infinity");
+
+for k from 1 to M/2 do
+    limit(pad[2*k-1],s=infinity);
+end do;		
+
+
+
+print("roots");
+for k from 1 to M/2  do
+rots[2*k-1];
+end do;
+
+print("poles");
+for k from 1 to M/2 do
+poles[2*k-1];
+end do;
+
+
+y0:=0.01;
+MM:=M; # change this value MM .LE. M
+
+assume(x,real);
+polariz:= simplify(subs(s=-1/(x+0.5+I*y0), pad[MM]));
+
+plot(Im(polariz),x=-0.5..0.5);
+done;
+
